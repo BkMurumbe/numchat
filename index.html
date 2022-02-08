@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+<style type="text/css">
+.msgbin {
+width:100%;
+height:300px;
+background:none;
+color:black;
+padding:12px;
+overflow-Y:scroll;
+border-radius:8px;
+box-sizing:border-box;
+border:solid 1px powderblue;
+}
+#msgbox{
+display:block;
+padding:1em;
+background:none;
+box-sizing:border-box;
+}
+#msgbox input{
+margin-bottom:12px;
+height:55px;
+width:200px;
+
+}
+#msgbox button{
+height:55px;
+width:120px;
+background:cyan;
+color:black;
+margin-bottom:12px;
+margin-left:20px;
+border-radius:8px;
+border:solid 1px powderblue;
+transition:0.2s;
+}
+#msgbox button:active{
+background:none;
+transform:scale(0.8);
+}
+.binni{
+padding-left:0.5em;
+line-height:0;
+}
+#msg,#bins{
+border-radius:8px;
+padding:12px;
+margin-bottom:8px;
+font-family:Arial,sans-serif;
+border:solid 1px powderblue;
+outline:none;
+background:white;
+}
+.butonbox{
+display:flex;
+}
+</style>
+</head>
+<body>
+<div>
+<div id="msgbox">
+<h2>Convert Text Into Binary</h2>
+<div>
+<textarea type="text" id="msg" cols="35" rows="10"  placeholder="Enter text" autofocus="autofocus"  ></textarea>
+<div class="butonbox">
+<button onclick="cmsg()">Convert</button>
+<button onclick="cler1()">Clear</button>
+</div>
+</div>
+<div>
+<textarea onclick="myFunction()" type="text" class="msgbin" id="binsbox" placeholder="here you will see binary" readonly="readonly"></textarea>
+</div>
+</div>
+<br>
+<hr>
+<br>
+<div id="msgbox">
+<h2>Convert Binary Into Text</h2>
+<textarea type="text" id="bins" cols="35" rows="10"   placeholder="Enter Binary code here" ></textarea>
+<div class="butonbox">
+<button onclick="bmsg()">Convert</button>
+<button onclick="cler2()">Clear</button>
+</div>
+<textarea type="text" class="msgbin" id="msgboxi" readonly="readonly" placeholder="here you will see Text"  ></textarea>
+</div>
+</div>
+<script type="text/javascript">
+function cmsg(){
+var input = document.getElementById("msg").value;
+var output =document.getElementById("binsbox");
+for(var i =0;i<input.length;i++){
+output.value += input[i].charCodeAt(0).toString(2) + " ";
+}
+}
+function binaryAgent(str) {
+
+var binString = '';
+
+str.split(' ').map(function(bin) {
+    binString += String.fromCharCode(parseInt(bin, 2));
+  });
+return binString;
+}
+
+function bmsg(){
+var bins = document.getElementById("bins").value;
+var msgstring = binaryAgent(bins);
+document.getElementById("msgboxi").value=msgstring;
+}
+
+
+function cler1(){
+document.getElementById("msg").value=null;
+document.getElementById("binsbox").value=null;
+}
+function cler2(){
+document.getElementById("bins").value=null;
+document.getElementById("msgboxi").value=null;
+}
+function myFunction() {
+  /* Get the text field */
+  var copyText = document.getElementById("binsbox");
+
+  /* Select the text field */
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+   /* Copy the text inside the text field */
+  navigator.clipboard.writeText(copyText.value);
+}
+</script>
+</body>
+</html>
